@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.Range;
+
 @Entity
 public class Expedition {
 	
@@ -13,13 +15,13 @@ public class Expedition {
 	    private int id;
 	    @Column(unique = true)
 	    private int idCommande;
-	    
-	    private String etat;
+	    @Range(min=0, max=2)
+	    private int etat;
 	    
 		public Expedition() {
 			super();
 		}
-		public Expedition(int id, int idCommande, String etat) {
+		public Expedition(int id, int idCommande, int etat) {
 			super();
 			this.id = id;
 			this.idCommande = idCommande;
@@ -37,10 +39,10 @@ public class Expedition {
 		public void setIdCommande(int idCommande) {
 			this.idCommande = idCommande;
 		}
-		public String getEtat() {
+		public int getEtat() {
 			return etat;
 		}
-		public void setEtat(String etat) {
+		public void setEtat(int etat) {
 			this.etat = etat;
 		}
 		@Override

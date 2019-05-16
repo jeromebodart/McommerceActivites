@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Mcommerce</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+</head>
+<body>
+	<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0, 101, 168, 0.6) 0%, rgba(232, 237, 207, 0) 50%), url('https://www.archer.com.mt/wp-content/uploads/java-spring-tutorials-(1).png');">
+		<div class="banner-content position-relative p-3 p-md-5 m-md-3 text-center">
+			<div class="col-md-5 p-lg-5 mx-auto my-5 bg-light">
+				<h1 class="display-4 font-weight-normal">Application Mcommerce</h1>
+				<h1 class="display-4 font-weight-normal">Exercice 2</h1>
+				div
+				<p>Commande N°</p>
+				<p th:text="${expedition.idCommande}" class="font-weight-bold"></p>
+				<p>Etat de la commande :</p>
+				<div th:switch="${expedition.etat}">
+					<p th:case="0"
+						style="color: red; font-size: xx-large; font-weight: bold;">En
+						préparation</p>
+					<p th:case="1"
+						style="color: orange; font-size: xx-large; font-weight: bold;">Expédiée</p>
+					<p th:case="2"
+						style="color: green; font-size: xx-large; font-weight: bold;">Livrée</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript"
+		src="http://localhost:8080/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+</body>
+</html>

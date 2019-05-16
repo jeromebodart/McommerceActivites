@@ -22,52 +22,52 @@ import com.mexpedition.web.exceptions.ImpossibleAjouterExpeditionException;
 
 @RestController
 public class ExpeditionController {
-	
+
 	@Autowired
-    private ExpeditionDao expeditionDao;
-	
-	 @PostMapping (value = "/expeditions")
-	    public ResponseEntity<Expedition> ajouterExpedition(@RequestBody Expedition expedition){
+	private ExpeditionDao expeditionDao;
 
-		 Expedition nouvelleexpedition = expeditionDao.save(expedition);
+	@PostMapping (value = "/suivi")
+	public ResponseEntity<Expedition> ajouterExpedition(@RequestBody Expedition expedition){
 
-	        if(nouvelleexpedition == null) throw new ImpossibleAjouterExpeditionException("Impossible d'ajouter cette expedition");
+		Expedition nouvelleexpedition = expeditionDao.save(expedition);
 
-	        return new ResponseEntity<Expedition>(expedition, HttpStatus.CREATED);
-	    }
-	 
-	    @GetMapping(value = "/expeditions/{id}")
-	    public Optional<Expedition> recupererUneExpedition(@PathVariable int id){
+		if(nouvelleexpedition == null) throw new ImpossibleAjouterExpeditionException("Impossible d'ajouter cette expedition");
 
-	        Optional<Expedition> expedition = expeditionDao.findById(id);
+		return new ResponseEntity<Expedition>(expedition, HttpStatus.CREATED);
+	}
 
-	        if(!expedition.isPresent()) throw new ExpeditionNotFound("Cette expedition n'existe pas");
+	@GetMapping(value = "/suivi/{id}")
+	public Optional<Expedition> recupererUneExpedition(@PathVariable int id){
 
-	        return expedition;
-	    }
+		Optional<Expedition> expedition = expeditionDao.findById(id);
 
-	    @GetMapping(value = "/expeditions")
-	    public List<Expedition> listeExpedition(){
-	        return expeditionDao.findAll();
-	    }
+		if(!expedition.isPresent()) throw new ExpeditionNotFound("Cette expedition n'existe pas");
 
-	    /*
-	    * Permet de mettre à jour une commande existante.
-	    * save() mettra à jours uniquement les champs renseignés dans l'objet commande reçu. Ainsi dans ce cas, comme le champs date dans "commande" n'est
-	    * pas renseigné, la date précédemment enregistrée restera en place
-	    **/
-	    @PutMapping(value = "/expeditions")
-	    public void updateExpedition(@RequestBody Expedition expedition) {
+		return expedition;
+	}
 
-	    	expeditionDao.save(expedition);
-	    }
-	
+	@GetMapping(value = "/suivis")
+	public List<Expedition> listeDesExpeditions(){
+		return expeditionDao.findAll();
+	}
 
 	/*
-	    * Opération pour enregistrer un paiement et notifier le microservice commandes pour mettre à jour le statut de la commande en question
-	    **/
-	    
-	    //ajouter un produit
+	 * Permet de mettre à jour une commande existante.
+	 * save() mettra à jours uniquement les champs renseignés dans l'objet commande reçu. Ainsi dans ce cas, comme le champs date dans "commande" n'est
+	 * pas renseigné, la date précédemment enregistrée restera en place
+	 **/
+	@PutMapping(value = "/suivi")
+	public void updateExpedition(@RequestBody Expedition expedition) {
+
+		expeditionDao.save(expedition);
+	}
+
+
+	/*
+	 * Opération pour enregistrer un paiement et notifier le microservice commandes pour mettre à jour le statut de la commande en question
+	 **/
+
+	//ajouter un produit
 	/*
 	 * @PostMapping(value = "/Expedition") public ResponseEntity<Void>
 	 * ajouterExpedition(@Valid @RequestBody Expedition expedition) { Expedition
